@@ -1,7 +1,6 @@
-import logo from './logo.svg'
 import './App.css'
-import React from 'react'
 import ReactLogo from './img/logo.png'
+import React from 'react'
 import ReactSearch from './img/search.svg'
 import ReactPlaylistSvg from './img/sprite.svg'
 import Note from './img/note.svg'
