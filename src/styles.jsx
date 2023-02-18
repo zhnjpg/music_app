@@ -622,7 +622,7 @@ export const ButtonPrev = styled.div`
   align-items: center;
   margin-right: 23px;
 `
-export const ButtonPrevSvg = styled.svg`
+export const ButtonPrevSvg = styled.img`
   width: 15px;
   height: 14px;
 `
@@ -637,7 +637,7 @@ export const ButtonPlay = styled.div`
   align-items: center;
   margin-right: 23px;
 `
-export const ButtonPlaySvg = styled.svg`
+export const ButtonPlaySvg = styled.img`
   width: 22px;
   height: 20px;
   fill: #d9d9d9;
@@ -654,7 +654,7 @@ export const ButtonNext = styled.div`
   margin-right: 28px;
   fill: #a53939;
 `
-export const ButtonNextSvg = styled.svg`
+export const ButtonNextSvg = styled.img`
   width: 15px;
   height: 14px;
   fill: inherit;
@@ -671,7 +671,7 @@ export const ButtonRepeat = styled.div`
   align-items: center;
   margin-right: 24px;
 `
-export const ButtonRepeatSvg = styled.svg`
+export const ButtonRepeatSvg = styled.img`
   width: 18px;
   height: 12px;
   fill: transparent;
@@ -687,7 +687,7 @@ export const ButtonShuffle = styled.div`
   -ms-flex-align: center;
   align-items: center;
 `
-export const ButtonShuffleSvg = styled.svg`
+export const ButtonShuffleSvg = styled.img`
   width: 19px;
   height: 12px;
   fill: transparent;
