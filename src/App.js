@@ -16,106 +16,179 @@ import Like from './img/like.svg'
 import Dislike from './img/dislike.svg'
 import Volume from './img/volume.svg'
 import PropTypes from 'prop-types'
-import * as S from './styles.jsx'
+import * as M from './styles.jsx'
+import * as N from './navmenu.js'
+import * as C from './centerblock.js'
+import * as S from './sidebar.js'
+import * as B from './bar.js'
+import { useEffect, useState } from 'react'
+import { DropdownButton, Dropdown } from 'react-bootstrap'
+import * as Skeleton from './Skeleton.js'
 
 function MainNav() {
+  const [visible, setVisible] = useState(true)
+  function toggleVisibility() {
+    setVisible(!visible)
+  }
   return (
-    <S.MainNav>
-      <S.NavLogo>
-        <S.LogoImage src={ReactLogo} alt="logo" />
-        <S.NavBurger>
-          <S.BurgerLine />
-          <S.BurgerLine />
-          <S.BurgerLine />
-        </S.NavBurger>
-        <S.NavMenu>
-          <S.MenuList>
-            <MenuItem name="Главное" />
-            <MenuItem name="Мой плейлист" />
-            <MenuItem name="Войти" />
-          </S.MenuList>
-        </S.NavMenu>
-      </S.NavLogo>
-    </S.MainNav>
-  )
-}
-function MenuItem(props) {
-  return (
-    <S.MenuItem>
-      <S.MenuLink>{props.name}</S.MenuLink>
-    </S.MenuItem>
+    <N.MainNav>
+      <N.NavLogo>
+        <N.LogoImage src={ReactLogo} alt="logo" />
+        <N.NavBurger onClick={toggleVisibility}>
+          <N.BurgerLine />
+          <N.BurgerLine />
+          <N.BurgerLine />
+        </N.NavBurger>
+        {visible ? null : (
+          <N.NavMenu>
+            <N.MenuList>
+              <li
+                className="MenuListItem"
+                style={{ color: 'white', cursor: 'pointer' }}
+              >
+                Главное
+              </li>
+              <li
+                className="MenuListItem"
+                style={{ color: 'white', marginTop: '10px', cursor: 'pointer' }}
+              >
+                Мой плейлист
+              </li>
+              <li
+                className="MenuListItem"
+                style={{ color: 'white', marginTop: '10px', cursor: 'pointer' }}
+              >
+                Войти
+              </li>
+            </N.MenuList>
+          </N.NavMenu>
+        )}
+      </N.NavLogo>
+    </N.MainNav>
   )
 }
 
 function Centerblock(props) {
   return (
-    <S.MainCenterblock>
-      <S.CenterblockSearch>
-        <S.SearchSvg src={ReactSearch} alt="search" />
-        <S.SearchText
+    <C.MainCenterblock>
+      <C.CenterblockSearch>
+        <C.SearchSvg src={ReactSearch} alt="search" />
+        <C.SearchText
           className="search__text"
           type="search"
           placeholder="Поиск"
           name="search"
         />
-      </S.CenterblockSearch>
+      </C.CenterblockSearch>
       <div className="centerblock__h2">
-        <S.CenterblockH2>Треки</S.CenterblockH2>
+        <C.CenterblockH2>Треки</C.CenterblockH2>
       </div>
-      <S.CenterblockFilter>
-        <S.FilterTitle>Искать по:</S.FilterTitle>
-        <FilterButton name="исполнителю" />
-        <FilterButton name="году выпуска" />
-        <FilterButton name="жанру" />
-      </S.CenterblockFilter>
-      <S.CenterblockContent>
-        <S.ContentTitle>
-          <S.Track>ТРЕК</S.Track>
-          <S.Artist>ИСПОЛНИТЕЛЬ</S.Artist>
-          <S.Album>АЛЬБОМ</S.Album>
-          <S.PlaylistSvg src={ReactPlaylistSvg} alt="playlist__svg" />
-        </S.ContentTitle>
-        <S.ContentPlaylist>
-          <S.PlaylistItem>
-            <S.PlaylistTrack>
-              <S.TrackTitle>
-                <S.TrackTitleImage>
-                  <S.TrackTitleSvg src={Note} alt="note" />
-                </S.TrackTitleImage>
+      <C.CenterblockFilter>
+        <C.FilterTitle>Искать по:</C.FilterTitle>
+        <FilterButton name="исполнителю" type="artist" />
+        <FilterButton name="году выпуска" type="year" />
+        <FilterButton name="жанру" type="genre" />
+      </C.CenterblockFilter>
+      <C.CenterblockContent>
+        <C.ContentTitle>
+          <C.Track>ТРЕК</C.Track>
+          <C.Artist>ИСПОЛНИТЕЛЬ</C.Artist>
+          <C.Album>АЛЬБОМ</C.Album>
+          <C.PlaylistSvg src={ReactPlaylistSvg} alt="playlist__svg" />
+        </C.ContentTitle>
+        <C.ContentPlaylist>
+          <C.PlaylistItem>
+            <C.PlaylistTrack>
+              <C.TrackTitle>
+                <C.TrackTitleImage>
+                  <C.TrackTitleSvg src={Note} alt="note" />
+                </C.TrackTitleImage>
                 <div className="track__title-text">
-                  <S.TrackTitleLink href="http://">
-                    {props.songname} <S.TrackTitleSpan />
-                  </S.TrackTitleLink>
+                  <C.TrackTitleLink href="http://">
+                    {props.songname} <C.TrackTitleSpan />
+                  </C.TrackTitleLink>
                 </div>
-              </S.TrackTitle>
-              <S.TrackAuthor>
-                <S.TrackAuthorLink href="http://">
+              </C.TrackTitle>
+              <C.TrackAuthor>
+                <C.TrackAuthorLink href="http://">
                   {props.artist}
-                </S.TrackAuthorLink>
-              </S.TrackAuthor>
-              <S.TrackAlbum>
-                <S.TrackAlbumLink href="http://">
+                </C.TrackAuthorLink>
+              </C.TrackAuthor>
+              <C.TrackAlbum>
+                <C.TrackAlbumLink href="http://">
                   {props.album}
-                </S.TrackAlbumLink>
-              </S.TrackAlbum>
+                </C.TrackAlbumLink>
+              </C.TrackAlbum>
               <div className="track__time">
-                <S.TrackTimeSvg alt="time">
+                <C.TrackTimeSvg alt="time">
                   <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
-                </S.TrackTimeSvg>
-                <S.TrackTimeText>{props.time}</S.TrackTimeText>
+                </C.TrackTimeSvg>
+                <C.TrackTimeText>{props.time}</C.TrackTimeText>
               </div>
-            </S.PlaylistTrack>
-          </S.PlaylistItem>
-        </S.ContentPlaylist>
-      </S.CenterblockContent>
-    </S.MainCenterblock>
+            </C.PlaylistTrack>
+          </C.PlaylistItem>
+        </C.ContentPlaylist>
+      </C.CenterblockContent>
+    </C.MainCenterblock>
   )
 }
+
 function FilterButton(props) {
+  let options
+  let isYear = false
+  if (props.type === 'artist') {
+    options = [
+      'Author',
+      'Author',
+      'Author',
+      'Author',
+      'Author',
+      'Author',
+      'Author',
+    ]
+  } else if (props.type === 'genre') {
+    options = ['genre', 'genre', 'genre', 'genre', 'genre', 'genre', 'genre']
+  } else {
+    isYear = true
+  }
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggling = () => setIsOpen(!isOpen)
+  const [selectedOption, setSelectedOption] = useState(null)
+  const onOptionClicked = (value) => () => {
+    setSelectedOption(value)
+    setIsOpen(false)
+    console.log(selectedOption)
+  }
   return (
-    <div>
-      <S.FilterButton>{props.name}</S.FilterButton>
-    </div>
+    <C.DropDownContainer>
+      <C.FilterButton onClick={toggling}>{props.name}</C.FilterButton>
+      {isOpen && !isYear && (
+        <C.DropDownListContainer>
+          <C.DropDownList>
+            {optionC.map((option) => (
+              <C.ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+                {option}
+              </C.ListItem>
+            ))}
+          </C.DropDownList>
+        </C.DropDownListContainer>
+      )}
+      {isOpen && isYear && (
+        <C.DropDownListContainer>
+          <C.DivYear>
+            <label>
+              <input type="radio" name="year" />
+              Сначала старые
+            </label>
+            <label>
+              <input type="radio" name="year" />
+              Сначала новые
+            </label>
+          </C.DivYear>
+        </C.DropDownListContainer>
+      )}
+    </C.DropDownContainer>
   )
 }
 
@@ -155,93 +228,104 @@ function SideBar() {
 
 function Bar(props) {
   return (
-    <S.Bar>
-      <S.BarContent>
-        <S.BarPlayerProgress />
-        <S.BarPlayerBlock>
-          <S.BarPlayer>
-            <S.PlayerControls>
-              <S.ButtonPrev>
-                <S.ButtonPrevSvg src={Prev} alt="prev"></S.ButtonPrevSvg>
-              </S.ButtonPrev>
-              <S.ButtonPlay>
-                <S.ButtonPlaySvg src={Play} alt="play"></S.ButtonPlaySvg>
-              </S.ButtonPlay>
-              <S.ButtonNext>
-                <S.ButtonNextSvg src={Next} alt="next"></S.ButtonNextSvg>
-              </S.ButtonNext>
-              <S.ButtonRepeat>
-                <S.ButtonRepeatSvg
+    <B.Bar>
+      <B.BarContent>
+        <B.BarPlayerProgress />
+        <B.BarPlayerBlock>
+          <B.BarPlayer>
+            <B.PlayerControls>
+              <B.ButtonPrev>
+                <B.ButtonPrevSvg src={Prev} alt="prev"></B.ButtonPrevSvg>
+              </B.ButtonPrev>
+              <B.ButtonPlay>
+                <B.ButtonPlaySvg src={Play} alt="play"></B.ButtonPlaySvg>
+              </B.ButtonPlay>
+              <B.ButtonNext>
+                <B.ButtonNextSvg src={Next} alt="next"></B.ButtonNextSvg>
+              </B.ButtonNext>
+              <B.ButtonRepeat>
+                <B.ButtonRepeatSvg
                   src={Repeat}
                   alt="repeat"
-                ></S.ButtonRepeatSvg>
-              </S.ButtonRepeat>
-              <S.ButtonShuffle>
-                <S.ButtonShuffleSvg
+                ></B.ButtonRepeatSvg>
+              </B.ButtonRepeat>
+              <B.ButtonShuffle>
+                <B.ButtonShuffleSvg
                   src={Shuffle}
                   alt="shuffle"
-                ></S.ButtonShuffleSvg>
-              </S.ButtonShuffle>
-            </S.PlayerControls>
+                ></B.ButtonShuffleSvg>
+              </B.ButtonShuffle>
+            </B.PlayerControls>
 
-            <S.PlayerTrackPlay>
-              <S.TrackPlayContain>
-                <S.TrackPlayImage>
-                  <S.TrackPlaySvg src={Note} alt="note" />
-                </S.TrackPlayImage>
-                <S.TrackPlayAuthor>
-                  <S.TrackPlayAuthorLink href="http://">
+            <B.PlayerTrackPlay>
+              <B.TrackPlayContain>
+                <B.TrackPlayImage>
+                  <B.TrackPlaySvg src={Note} alt="note" />
+                </B.TrackPlayImage>
+                <B.TrackPlayAuthor>
+                  <B.TrackPlayAuthorLink href="http://">
                     {props.name}
-                  </S.TrackPlayAuthorLink>
-                </S.TrackPlayAuthor>
-                <S.TrackPlayAlbum>
-                  <S.TrackPlayAlbumLink href="http://">
+                  </B.TrackPlayAuthorLink>
+                </B.TrackPlayAuthor>
+                <B.TrackPlayAlbum>
+                  <B.TrackPlayAlbumLink href="http://">
                     {props.artist}
-                  </S.TrackPlayAlbumLink>
-                </S.TrackPlayAlbum>
-              </S.TrackPlayContain>
+                  </B.TrackPlayAlbumLink>
+                </B.TrackPlayAlbum>
+              </B.TrackPlayContain>
 
-              <S.TrackPlayLikeDis>
-                <S.TrackPlayLike>
-                  <S.TrackPlayLikeSvg src={Like} alt="like" />
-                </S.TrackPlayLike>
-                <S.TrackPlayDislike>
-                  <S.TrackPlayDislikeSvg src={Dislike} alt="dislike" />
-                </S.TrackPlayDislike>
-              </S.TrackPlayLikeDis>
-            </S.PlayerTrackPlay>
-          </S.BarPlayer>
-          <S.BarVolumeBlock>
-            <S.VolumeContent>
-              <S.VolumeImage>
-                <S.VolumeSvg src={Volume} alt="volume" />
-              </S.VolumeImage>
-              <S.VolumeProgress>
-                <S.VolumeProgressLine type="range" name="range" />
-              </S.VolumeProgress>
-            </S.VolumeContent>
-          </S.BarVolumeBlock>
-        </S.BarPlayerBlock>
-      </S.BarContent>
-    </S.Bar>
+              <B.TrackPlayLikeDis>
+                <B.TrackPlayLike>
+                  <B.TrackPlayLikeSvg src={Like} alt="like" />
+                </B.TrackPlayLike>
+                <B.TrackPlayDislike>
+                  <B.TrackPlayDislikeSvg src={Dislike} alt="dislike" />
+                </B.TrackPlayDislike>
+              </B.TrackPlayLikeDis>
+            </B.PlayerTrackPlay>
+          </B.BarPlayer>
+          <B.BarVolumeBlock>
+            <B.VolumeContent>
+              <B.VolumeImage>
+                <B.VolumeSvg src={Volume} alt="volume" />
+              </B.VolumeImage>
+              <B.VolumeProgress>
+                <B.VolumeProgressLine type="range" name="range" />
+              </B.VolumeProgress>
+            </B.VolumeContent>
+          </B.BarVolumeBlock>
+        </B.BarPlayerBlock>
+      </B.BarContent>
+    </B.Bar>
   )
 }
 
 function App() {
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    setLoading(true)
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+    return () => clearTimeout(timer)
+  }, [])
   return (
-    <S.Wrapper>
-      <S.Container>
-        <S.Main>
+    <M.Wrapper>
+      <M.Container>
+        <M.Main>
           <MainNav />
-            <Centerblock />
-            <SideBar />
-            <Bar />
+          {loading && <Skeleton.Centerblock />}
+          {!loading && <Centerblock />}
+          {loading && <Skeleton.SideBar />}
+          {!loading && <SideBar />}
+          {loading && <Skeleton.Bar />}
+          {!loading && <Bar />}
           <div>
             <footer className="footer"></footer>
           </div>
-        </S.Main>
-      </S.Container>
-    </S.Wrapper>
+        </M.Main>
+      </M.Container>
+    </M.Wrapper>
   )
 }
 
