@@ -69,6 +69,9 @@ function MainNav() {
 }
 
 function Centerblock(props) {
+  const [activeGenre, setActiveGenre] = useState(false)
+  const [activeYear, setActiveYear] = useState(false)
+  const [activeArtist, setActiveArtist] = useState(false)
   return (
     <C.MainCenterblock>
       <C.CenterblockSearch>
@@ -85,9 +88,36 @@ function Centerblock(props) {
       </div>
       <C.CenterblockFilter>
         <C.FilterTitle>Искать по:</C.FilterTitle>
-        <FilterButton name="исполнителю" type="artist" />
-        <FilterButton name="году выпуска" type="year" />
-        <FilterButton name="жанру" type="genre" />
+        <FilterButton
+          name="исполнителю"
+          type="artist"
+          isActive={activeArtist === true}
+          onShow={() => {
+            setActiveArtist(!activeArtist)
+            setActiveGenre(false)
+            setActiveYear(false)
+          }}
+        />
+        <FilterButton
+          name="году выпуска"
+          type="year"
+          isActive={activeYear === true}
+          onShow={() => {
+            setActiveYear(!activeYear)
+            setActiveGenre(false)
+            setActiveArtist(false)
+          }}
+        />
+        <FilterButton
+          name="жанру"
+          type="genre"
+          isActive={activeGenre === true}
+          onShow={() => {
+            setActiveGenre(!activeGenre)
+            setActiveArtist(false)
+            setActiveYear(false)
+          }}
+        />
       </C.CenterblockFilter>
       <C.CenterblockContent>
         <C.ContentTitle>
@@ -151,22 +181,22 @@ function FilterButton(props) {
   } else {
     isYear = true
   }
-  const [isOpen, setIsOpen] = useState(false)
 
-  const toggling = () => setIsOpen(!isOpen)
+ 
   const [selectedOption, setSelectedOption] = useState(null)
   const onOptionClicked = (value) => () => {
     setSelectedOption(value)
-    setIsOpen(false)
+
     console.log(selectedOption)
   }
+
   return (
     <C.DropDownContainer>
-      <C.FilterButton onClick={toggling}>{props.name}</C.FilterButton>
-      {isOpen && !isYear && (
+      <C.FilterButton onClick={props.onShow}>{props.name}</C.FilterButton>
+      {props.isActive && !isYear && (
         <C.DropDownListContainer>
           <C.DropDownList>
-            {optionC.map((option) => (
+            {options.map((option) => (
               <C.ListItem onClick={onOptionClicked(option)} key={Math.random()}>
                 {option}
               </C.ListItem>
@@ -174,7 +204,8 @@ function FilterButton(props) {
           </C.DropDownList>
         </C.DropDownListContainer>
       )}
-      {isOpen && isYear && (
+      {console.log(props.isActive)}
+      {isYear && props.isActive && (
         <C.DropDownListContainer>
           <C.DivYear>
             <label>

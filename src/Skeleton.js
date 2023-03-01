@@ -233,7 +233,7 @@ function FilterButton(props) {
       {isOpen && !isYear && (
         <C.DropDownListContainer>
           <C.DropDownList>
-            {optionC.map((option) => (
+            {options.map((option) => (
               <C.ListItem onClick={onOptionClicked(option)} key={Math.random()}>
                 {option}
               </C.ListItem>

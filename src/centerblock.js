@@ -165,11 +165,11 @@ export const DropDownHeader = styled('div')`
   }
 `
 
-export const DropDownListContainer = styled('div')`
-disp`
+export const DropDownListContainer = styled('div')``
 
 export const DropDownList = styled('ul')`
   width: 200px;
+  height: 220px;
   position: absolute;
   z-index: 1;
   padding: 0;
@@ -180,11 +180,26 @@ export const DropDownList = styled('ul')`
   border-radius: 12px;
   box-sizing: border-box;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: scroll;
   &:first-child {
     padding-top: 0.8em;
   }
-  &:active {
-    color: #9a48f1;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: white;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   }
 `
 
@@ -196,20 +211,34 @@ export const DivYear = styled.div`
   padding-left: 20px;
   padding-top: 7px;
   width: 200px;
-  height: 50px;
+  height: 60px;
   background: #313131;
   border: 1px solid #181818;
   border-radius: 12px;
   color: #ffffff;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
 `
 
 export const MainDrop = styled.div`
   display: flex;
 `
 
-export const ListItem = styled('li')`
+export const ListItem = styled('button')`
   list-style: none;
   margin-bottom: 0.8em;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  &:focus {
+    color: #b672ff;
+    border-bottom: 2px dashed #b672ff;
+    padding-bottom: 3px;
+  }
 `
 
 export const FilterButton = styled.button`
