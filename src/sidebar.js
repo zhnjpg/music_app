@@ -62,12 +62,13 @@ export const SidebarPersonalName = styled.p`
   color: #ffffff;
   margin-right: 16px;
 `
-export const SidebarAvatar = styled.div`
+export const SidebarAvatar = styled.svg`
   width: 43px;
   height: 43px;
   background-color: #313131;
   border-radius: 50%;
 `
+export const SideBarLogOut = styled.img``
 export const SidebarBlock = styled.div`
   height: 100%;
   padding: 240px 0 0 0;
