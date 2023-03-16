@@ -68,7 +68,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/main"
+          path="/"
           element={
             <Protected isLoggedIn={isLoggedIn}>
               <Main />

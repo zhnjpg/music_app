@@ -50,7 +50,7 @@ export const BarContent = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
 `
-export const BarPlayerProgress = styled.div`
+export const BarPlayerProgress = styled.input`
   width: 100%;
   height: 5px;
   background: #2e2e2e;
@@ -230,11 +230,13 @@ export const TrackPlaySvg = styled.svg`
   fill: transparent;
   stroke: #4e4e4e;
 `
+
 export const TrackPlayAuthor = styled.div`
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: author;
   min-width: 49px;
+  width: 100px;
 `
 export const TrackPlayAuthorLink = styled.a`
   font-style: normal;

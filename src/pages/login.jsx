@@ -21,7 +21,7 @@ export function LogIn(props) {
           </S.LogInLogo>
           <S.Login placeholder="Логин" />
           <S.Password placeholder="Пароль" />
-          <Link to="/main">
+          <Link to="/">
             <LogInButton onClick={checkInputs} name="Войти" />
           </Link>
           <Link to="/register">

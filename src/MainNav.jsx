@@ -43,7 +43,7 @@ export function MainNav() {
         {visible ? null : (
           <N.NavMenu>
             <N.MenuList>
-              <Link to="/main">
+              <Link to="/">
                 <li
                   className="MenuListItem"
                   style={{ color: 'white', cursor: 'pointer' }}

@@ -34,6 +34,7 @@ export const Password = styled.input`
   margin-top: 38px;
   outline: none;
   width: 278px;
+  margin-bottom: 60px;
   ::placeholder {
     color: #e1e1e1;
   }
@@ -45,7 +46,6 @@ export const LogInButton = styled.button`
   color: #ffffff;
   border-radius: 6px;
   border: none;
-  margin-top: 60px;
 `
 export const RegisterButton = styled.button`
   width: 278px;

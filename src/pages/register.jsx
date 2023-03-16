@@ -24,7 +24,7 @@ export function Register(props) {
           <S.Login placeholder="Логин" />
           <S.Password placeholder="Пароль" />
           <S.RepeatPassword placeholder="Повторите пароль" />
-          <Link to="/main">
+          <Link to="/">
             <RegisterButton name="Зарегистрироваться" onClick={checkInputs} />
           </Link>
         </S.RegisterDiv>

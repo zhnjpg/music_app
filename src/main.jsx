@@ -48,7 +48,7 @@ export function Main() {
           {loading && <Skeleton.SideBar />}
           {!loading && <SideBar />}
           {loading && <Skeleton.Bar />}
-          {!loading && <Bar />}
+          {!loading && <Bar name="Dropin" artist="Bobby Marleni" />}
         </M.Main>
       </M.Container>
     </M.Wrapper>
