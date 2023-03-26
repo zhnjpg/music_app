@@ -133,11 +133,11 @@ export const SearchText = styled.input`
   }
   ::placeholder {
     background-color: transparent;
-    color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+    color: var(--c, white);
   }
 `
 export const FilterTitle = styled.div`

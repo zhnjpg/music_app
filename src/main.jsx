@@ -28,6 +28,7 @@ import { MainNav } from './MainNav.jsx'
 import { Centerblock } from './Centerblock.jsx'
 import { SideBar } from './Sidebar.jsx'
 import { Bar } from './Bar.jsx'
+import { useThemeContext } from './App'
 
 export function Main() {
   const [loading, setLoading] = useState(false)
@@ -38,10 +39,11 @@ export function Main() {
     }, 2000)
     return () => clearTimeout(timer)
   }, [])
+  const { theme } = useThemeContext()
   return (
-    <M.Wrapper>
-      <M.Container>
-        <M.Main>
+    <M.Wrapper style={{ background: theme.background }}>
+      <M.Container style={{ background: theme.background }}>
+        <M.Main style={{ background: theme.background }}>
           <MainNav />
           {loading && <Skeleton.Centerblock />}
           {!loading && <Centerblock />}

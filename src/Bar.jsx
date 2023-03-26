@@ -25,6 +25,7 @@ import * as B from './bar.js'
 import { useEffect, useState, useRef } from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import * as Skeleton from './Skeleton.js'
+import { useThemeContext } from './App'
 
 let timerId = setInterval(BarPlayer, 1000)
 clearInterval(timerId)
@@ -35,6 +36,7 @@ function BarPlayer() {
 export function Bar(props) {
   const [isPlaying, setPlaying] = useState(false)
   const ref = useRef(null)
+  const { theme } = useThemeContext()
 
   const handleStop = () => {
     ref.current.pause()
@@ -44,7 +46,7 @@ export function Bar(props) {
     ref.current.play()
   }
   return (
-    <B.Bar>
+    <B.Bar style={{ background: theme.background }}>
       <B.BarContent>
         <B.BarPlayerProgress
           className="BarPlayerProgress"
@@ -97,10 +99,14 @@ export function Bar(props) {
                 </B.TrackPlayImage>
 
                 <B.TrackPlayAuthor>
-                  <B.TrackPlayAuthorLink>{props.name}</B.TrackPlayAuthorLink>
+                  <B.TrackPlayAuthorLink style={{ color: theme.color }}>
+                    {props.name}
+                  </B.TrackPlayAuthorLink>
                 </B.TrackPlayAuthor>
                 <B.TrackPlayAlbum>
-                  <B.TrackPlayAlbumLink>{props.artist}</B.TrackPlayAlbumLink>
+                  <B.TrackPlayAlbumLink style={{ color: theme.color }}>
+                    {props.artist}
+                  </B.TrackPlayAlbumLink>
                 </B.TrackPlayAlbum>
               </B.TrackPlayContain>
 

@@ -24,13 +24,15 @@ import * as B from './bar.js'
 import { useEffect, useState } from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import * as Skeleton from './Skeleton.js'
+import { useThemeContext } from './App'
 
 export function Centerblock(props) {
+  const { theme } = useThemeContext()
   const [activeGenre, setActiveGenre] = useState(false)
   const [activeYear, setActiveYear] = useState(false)
   const [activeArtist, setActiveArtist] = useState(false)
   return (
-    <C.MainCenterblock>
+    <C.MainCenterblock style={{ background: theme.background }}>
       <C.CenterblockSearch>
         <C.SearchSvg src={ReactSearch} alt="search" />
         <C.SearchText
@@ -41,10 +43,10 @@ export function Centerblock(props) {
         />
       </C.CenterblockSearch>
       <div className="centerblock__h2">
-        <C.CenterblockH2>Треки</C.CenterblockH2>
+        <C.CenterblockH2 style={{ color: theme.color }}>Треки</C.CenterblockH2>
       </div>
       <C.CenterblockFilter>
-        <C.FilterTitle>Искать по:</C.FilterTitle>
+        <C.FilterTitle style={{ color: theme.color }}>Искать по:</C.FilterTitle>
         <FilterButton
           name="исполнителю"
           type="artist"
@@ -121,6 +123,7 @@ export function Centerblock(props) {
 }
 
 function FilterButton(props) {
+  const { theme } = useThemeContext()
   let options
   let isYear = false
   if (props.type === 'artist') {
@@ -147,7 +150,16 @@ function FilterButton(props) {
 
   return (
     <C.DropDownContainer>
-      <C.FilterButton onClick={props.onShow}>{props.name}</C.FilterButton>
+      <C.FilterButton
+        style={{
+          color: theme.color,
+          background: theme.background,
+          border: '1px solid' + theme.color,
+        }}
+        onClick={props.onShow}
+      >
+        {props.name}
+      </C.FilterButton>
       {props.isActive && !isYear && (
         <C.DropDownListContainer>
           <C.DropDownList>

@@ -37,9 +37,22 @@ import { DaysPlaylist } from './pages/daysplaylist'
 import { DanceHits } from './pages/100dancehits'
 import { IndiPlaylist } from './pages/indi.jsx'
 import { MyPlaylist } from './pages/myplaylist.jsx'
+import { useContext } from 'react'
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(null)
+  const [currentTheme, setCurrentTheme] = useState(themes.dark)
+  const { theme } = useThemeContext()
 
+  const toggleTheme = () => {
+    if (currentTheme === themes.dark) {
+      document.querySelector('.search__text').style.setProperty('--c', 'black')
+      setCurrentTheme(themes.light)
+      return
+    }
+
+    setCurrentTheme(themes.dark)
+    document.querySelector('.search__text').style.setProperty('--c', 'white')
+  }
   return (
     <BrowserRouter>
       <Routes>
@@ -71,7 +84,11 @@ function App() {
           path="/"
           element={
             <Protected isLoggedIn={isLoggedIn}>
-              <Main />
+              <ThemeContext.Provider
+                value={{ theme: currentTheme, toggleTheme }}
+              >
+                <Main />
+              </ThemeContext.Provider>
             </Protected>
           }
         ></Route>
@@ -82,6 +99,30 @@ function App() {
       </Routes>
     </BrowserRouter>
   )
+}
+
+export const themes = {
+  light: {
+    color: '#282c34',
+    background: '#fff',
+  },
+  dark: {
+    color: '#fff',
+    background: '#1C1C1C',
+  },
+}
+
+export const ThemeContext = React.createContext({
+  theme: themes.dark,
+  toggleTheme: () => {},
+})
+
+export const useThemeContext = () => {
+  const theme = useContext(ThemeContext)
+  console.log(theme)
+  if (!theme) return theme.dark
+
+  return theme
 }
 
 export default App

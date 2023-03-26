@@ -1,5 +1,6 @@
 import './App.css'
 import ReactLogo from './img/logo.png'
+import ReactLogoLight from './img/reactlogolight.svg'
 import React from 'react'
 import ReactSearch from './img/search.svg'
 import ReactPlaylistSvg from './img/sprite.svg'
@@ -22,23 +23,30 @@ import * as C from './centerblock.js'
 import * as S from './sidebar.js'
 import * as B from './bar.js'
 import { useEffect, useState } from 'react'
+import { useThemeContext } from './App'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import * as Skeleton from './Skeleton.js'
+import Night from './img/nighttheme.svg'
+import Day from './img/daytheme.svg'
 
 export function MainNav() {
   const [visible, setVisible] = useState(true)
   function toggleVisibility() {
     setVisible(!visible)
   }
+  const { theme } = useThemeContext()
   return (
-    <N.MainNav>
+    <N.MainNav style={{ background: theme.background }}>
       <N.NavLogo>
-        <N.LogoImage src={ReactLogo} alt="logo" />
+        {theme.color === '#282c34' && (
+          <N.LogoImage src={ReactLogoLight} alt="logo" />
+        )}
+        {theme.color === '#fff' && <N.LogoImage src={ReactLogo} alt="logo" />}
         <N.NavBurger onClick={toggleVisibility}>
-          <N.BurgerLine />
-          <N.BurgerLine />
-          <N.BurgerLine />
+          <N.BurgerLine style={{ backgroundcolor: theme.background }} />
+          <N.BurgerLine style={{ backgroundcolor: theme.background }} />
+          <N.BurgerLine style={{ backgroundcolor: theme.background }} />
         </N.NavBurger>
         {visible ? null : (
           <N.NavMenu>
@@ -46,7 +54,7 @@ export function MainNav() {
               <Link to="/">
                 <li
                   className="MenuListItem"
-                  style={{ color: 'white', cursor: 'pointer' }}
+                  style={{ color: theme.color, cursor: 'pointer' }}
                 >
                   Главное
                 </li>
@@ -55,7 +63,7 @@ export function MainNav() {
                 <li
                   className="MenuListItem"
                   style={{
-                    color: 'white',
+                    color: theme.color,
                     marginTop: '10px',
                     cursor: 'pointer',
                   }}
@@ -65,14 +73,28 @@ export function MainNav() {
               </Link>
               <li
                 className="MenuListItem"
-                style={{ color: 'white', marginTop: '10px', cursor: 'pointer' }}
+                style={{
+                  color: theme.color,
+                  marginTop: '10px',
+                  cursor: 'pointer',
+                }}
               >
                 Войти
               </li>
+              <ThemeSwitcher></ThemeSwitcher>
             </N.MenuList>
           </N.NavMenu>
         )}
       </N.NavLogo>
     </N.MainNav>
   )
+}
+
+export const ThemeSwitcher = () => {
+  const { toggleTheme } = useThemeContext()
+  const { theme } = useThemeContext()
+
+  if (theme.color === '#282c34')
+    return <N.ThemeSwitcher src={Day} alt="logo" onClick={toggleTheme} />
+  else return <N.ThemeSwitcher src={Night} alt="logo" onClick={toggleTheme} />
 }

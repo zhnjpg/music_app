@@ -93,3 +93,8 @@ export const MenuLink = styled.a`
   font-size: 16px;
   line-height: 24px;
 `
+export const ThemeSwitcher = styled.img`
+  margin-top: 26px;
+  position: absolute;
+  z-index: 1;
+`

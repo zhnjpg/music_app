@@ -25,12 +25,16 @@ import { useEffect, useState } from 'react'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import * as Skeleton from './Skeleton.js'
+import { useThemeContext } from './App'
 
 export function SideBar() {
+  const { theme } = useThemeContext()
   return (
-    <S.MainSidebar>
+    <S.MainSidebar style={{ background: theme.background }}>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+        <S.SidebarPersonalName style={{ color: theme.color }}>
+          Sergey.Ivanov
+        </S.SidebarPersonalName>
         <S.SidebarAvatar />
       </S.SidebarPersonal>
       <S.SidebarBlock>
